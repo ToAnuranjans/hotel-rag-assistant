@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "name": "Grand Palace Hotel",
+        "description": "5-star hotel with free WiFi, spa, and rooftop pool. Located in city center.",
+        "cancellation_policy": "Free cancellation up to 24 hours before check-in."
+    },
+    {
+        "id": 2,
+        "name": "Budget Inn",
+        "description": "Affordable 2-star inn with complimentary breakfast and parking.",
+        "cancellation_policy": "Non-refundable booking."
+    }
+]
