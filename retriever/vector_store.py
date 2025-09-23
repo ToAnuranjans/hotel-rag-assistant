@@ -1,9 +1,16 @@
 import json
 import os
-from sqlalchemy import create_engine,text
+
+from dotenv import load_dotenv
+from sqlalchemy import create_engine, text
 from langchain_openai import OpenAIEmbeddings
 
-DB_URL= os.getenv("DATABASE_URL")
+load_dotenv()
+
+DB_URL = os.getenv("DATABASE_URL")
+if not DB_URL:
+    raise RuntimeError("DATABASE_URL is not set. Please configure the environment before starting the service.")
+
 engine = create_engine(DB_URL)
 
 # ensure pgvector extension exists
@@ -19,7 +26,7 @@ def init_db():
             embedding vector(1536)
         )
         """))
-def insert_embeddings(file_path="data/hotels.json"):
+def insert_embeddings(file_path="data/hotel.json"):
     embeddings= OpenAIEmbeddings()
     with open(file_path,"r") as f:
         hotels = json.load(f)
@@ -43,5 +50,3 @@ def search_similar(query,top_k=2):
         LIMIT :top_k
         """),query=embeddings.embed_query(query),top_k=top_k)
         return results.fetchall()
-
-

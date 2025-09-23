@@ -14,4 +14,8 @@ def setup():
 async def ask(query):
     docs = search_similar(query)
     answer = rag_answer(query,docs)
-    return {"query": query,  "answer": answer, "sources": [{ "name": d[0], "snippet": d[1] } for d in docs]}
+    return {
+        "query": query,
+        "answer": answer,
+        "sources": [{"name": d[1], "snippet": d[2]} for d in docs],
+    }
